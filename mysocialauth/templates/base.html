@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Social Auth in Django</title>
+</head>
+<body>
+  <header>
+    <h1>Simple Social Auth</h1>
+    {% if user.is_authenticated %}
+      You are signed in as <strong>{{ user.username }}</strong> <br/>
+      <a href="{% url 'home' %}">home</a> /
+      <a href="{% url 'logout' %}">logout</a>
+    {% else %}
+      <a href="{% url 'login' %}">login</a> 
+    {% endif %}
+    <hr>
+  </header>
+  <main>
+    {% for message in messages %}
+      <p style="color: {% if message.tags == 'success' %}green{% elif message.tags == 'error' %}red{% endif %}">
+        {{ message }}
+      </p>
+    {% endfor %}
+    {% block content %}
+    {% endblock %}
+  </main>
+</body>
+</html>
